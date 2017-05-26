@@ -33,7 +33,7 @@ module.exports = function makeComponent(name) {
   shell.exec(`mkdir ${FOLDER}`);
 
   step(`Create component file ${COMPONENT_FILE}`);
-  fs.writeFileSync(COMPONENT_FILE, COMPONENT.main(name));
+  fs.writeFileSync(COMPONENT_FILE, COMPONENT.index(name));
 
   step(`Create docs file ${DOCS_FILE}`);
   fs.writeFileSync(DOCS_FILE, COMPONENT.docs(name));
