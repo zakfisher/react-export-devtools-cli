@@ -1,6 +1,6 @@
 {
   "name": "react-export-devtools-cli",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A CLI for dynamic React component generation.",
   "main": "index.js",
   "bin": {
