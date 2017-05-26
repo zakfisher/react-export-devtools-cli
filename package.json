@@ -1,0 +1,19 @@
+{
+  "name": "react-export-devtools",
+  "version": "2.3.0",
+  "description": "A CLI for dynamic React component generation.",
+  "main": "index.js",
+  "bin": {
+    "red": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zak Fisher <zak.fisher@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "shelljs": "^0.7.7"
+  }
+}
