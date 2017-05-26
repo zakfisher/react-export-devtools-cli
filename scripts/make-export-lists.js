@@ -83,11 +83,11 @@ module.exports = function makeExportLists() {
       if (name.indexOf('.js') === -1) return false;
       name = name.replace('.js', '');
       DEMOS_FILE  += `import ${name} from './demos/${name}.js';\n`;
-      DEMOS_OBJ  += `DEMOS["${name}"] = ${name};`;
+      DEMOS_OBJ  += `DEMOS["${name}"] = ${name};\n`;
     });
 
     // Write src/app/demos.js
-    DEMOS_FILE += `const DEMOS = {}; ${DEMOS_OBJ} export default DEMOS;`;
+    DEMOS_FILE += `const DEMOS = {};\n${DEMOS_OBJ}\nexport default DEMOS;`;
     fs.writeFileSync(DEMOS_JS, DEMOS_FILE);
   });
 };
