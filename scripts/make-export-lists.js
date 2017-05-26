@@ -44,32 +44,30 @@ module.exports = function makeExportLists() {
       EXPORTS_LIST[name] = path;
 
       COMPONENTS_FILE += `import ${name} from './components/${name}';\n`;
-      COMPONENTS_OBJ  += `COMPONENTS["${name}"] = ${name};`;
+      COMPONENTS_OBJ  += `COMPONENTS["${name}"] = ${name};\n`;
 
-      DOCS_FILE  += `import ${name}Doc from './components/docs';\n`;
-      DOCS_OBJ   += `DOCS["${name}"] = ${name}Doc;`;
+      DOCS_FILE  += `import ${name}Doc from './components/${name}/docs';\n`;
+      DOCS_OBJ   += `DOCS["${name}"] = ${name}Doc;\n`;
 
       STYLE_FILE += `import './components/${name}/style.sass';\n`;
     };
-
-    const getPath = (name) => `${COMPONENTS_FOLDER}/${name}/index.js`;
 
     // Add bundles
     EXPORTS_LIST['style'] = `${EXPORT_FOLDER}/style.js`;
     items.map(name => {
       if (name.indexOf('.') !== -1) return false;
-      addBundle(name, getPath(name));
+      addBundle(name, `${COMPONENTS_FOLDER}/${name}/index.js`);
     });
 
     // Write .exports.json
     fs.writeFileSync(EXPORTS_JSON, JSON.stringify(EXPORTS_LIST));
 
     // Write src/export/components.js
-    COMPONENTS_FILE += `const COMPONENTS = {}; ${COMPONENTS_OBJ} export default COMPONENTS;`;
+    COMPONENTS_FILE += `const COMPONENTS = {};\n${COMPONENTS_OBJ}\nexport default COMPONENTS;`;
     fs.writeFileSync(COMPONENTS_JS, COMPONENTS_FILE);
 
     // Write src/export/docs.js
-    DOCS_FILE += `const DOCS = {}; ${DOCS_OBJ} export default DOCS;`;
+    DOCS_FILE += `const DOCS = {};\n${DOCS_OBJ}\nexport default DOCS;`;
     fs.writeFileSync(DOCS_JS, DOCS_FILE);
 
     // Write src/export/components/style.js
